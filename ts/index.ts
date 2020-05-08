@@ -9,7 +9,7 @@ let center = {
 }
 let mouseCircle = new Circle({x: 50, y: 50}, 50, 'teal', canvas);
 let obstacleCircle = new Circle({x: center.x, y: center.y}, 50);
-obstacleCircle.linearMove({direction: 120, speed: 5}, true)
+obstacleCircle.linearMove({x: 5, y: 2}, true)
 let test = new Rectangle({x: 200,y: 300}, 50, 300, 'orange');
 
 //canvas.addElement(mouseCircle);

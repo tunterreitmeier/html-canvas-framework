@@ -16,9 +16,9 @@ export class Canvas {
   elements: Array<Drawable>;
   automaticResize: Boolean;
   constructor(selector: string, options?: CanvasOptions) {
-    this.canvas = document.querySelector(selector);
+    this.canvas = document.querySelector(selector) || new HTMLCanvasElement;
     this.resize();
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext('2d') || new CanvasRenderingContext2D;
     this.elements = [];
     this.automaticResize = options?.automaticResize || false;
     if(this.automaticResize) {

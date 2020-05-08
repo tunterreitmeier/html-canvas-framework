@@ -10,17 +10,23 @@ export class Circle extends Shape {
   draw():void {
     this.ctx.beginPath();
     this.ctx.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI * 2);
-    this.ctx.fillStyle = this.color;
+    this.ctx.fillStyle = this.color || 'black';
     this.ctx.fill();
   }
   getDistance(other: Circle):number {
     return Math.sqrt(
-      Math.pow(this.pos.x - other.pos.x, 2) + Math.pow(this.pos.y - other.pos.y, 2)
+      Math.pow(this.pos.x - other.pos.x, 2) +
+      Math.pow(this.pos.y - other.pos.y, 2)
     ) - (this.r + other.r);
   }
   stayInBnds():void {
-    if(this.pos.x < 0 || this.pos.x > this.canvas.canvas.width) {
-      this.vector.direction = 180 - this.vector.direction;
+    if(this.pos.x + this.r > this.canvas.canvas.width ||
+      this.pos.x - this.r < 0) {
+      this.speed.x *= -1;
+    }
+    if(this.pos.y + this.r > this.canvas.canvas.height ||
+      this.pos.y - this.r < 0) {
+      this.speed.y *= -1;
     }
   }
 }
@@ -30,7 +36,7 @@ export class Rectangle extends Shape {
     super(pos, color, canvas);
   }
   draw():void {
-    this.ctx.fillStyle = this.color;
+    this.ctx.fillStyle = this.color || 'black';
     this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
   }
   stayInBnds():void {

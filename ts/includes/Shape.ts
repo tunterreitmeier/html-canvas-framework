@@ -2,9 +2,9 @@ import {Canvas, Drawable} from './Canvas';
 import {Pos} from './Interfaces';
 import {MathG} from './MathG';
 
-interface LinearMovingVector {
-  direction: number; // between 0 and 360
-  speed: number;
+interface MovingSpeed {
+  x: number;
+  y: number;
 }
 enum MoveType {
   linear
@@ -13,7 +13,7 @@ enum MoveType {
 export abstract class Shape implements Drawable {
   canvas: Canvas;
   ctx: CanvasRenderingContext2D;
-  vector: LinearMovingVector;
+  speed: MovingSpeed;
   moved: Boolean;
   moveType: MoveType;
   stayInBounds: Boolean;
@@ -32,8 +32,8 @@ export abstract class Shape implements Drawable {
   removeFromCanvas(canvas: Canvas): void {
     canvas.removeElement(this);
   }
-  linearMove(vector: LinearMovingVector, stayInBounds: Boolean = false) {
-    this.vector = vector;
+  linearMove(speed: MovingSpeed, stayInBounds: Boolean = false) {
+    this.speed = speed;
     this.moved = true;
     this.moveType = MoveType.linear;
     this.stayInBounds = stayInBounds;
@@ -42,8 +42,8 @@ export abstract class Shape implements Drawable {
     switch (this.moveType) {
       case MoveType.linear:
         this.stayInBnds();
-        this.pos.x += MathG.sinD(this.vector.direction) * this.vector.speed;
-        this.pos.y -= MathG.cosD(this.vector.direction) * this.vector.speed;
+        this.pos.x += this.speed.x;
+        this.pos.y -= this.speed.y;
         break;
     }
   }
