@@ -1,6 +1,5 @@
 import {Canvas} from './Canvas';
 import {Drawable, Pos} from './Interfaces';
-import {MathG} from './MathG';
 
 interface MovingSpeed {
   x: number;
@@ -19,6 +18,7 @@ export abstract class Shape implements Drawable {
   moveType: MoveType;
   stayInBounds: Boolean;
   m: number;
+  hasGravity: Boolean;
 
   constructor(public pos: Pos, public color?: string, canvas?: Canvas) {
     this.color = color || 'black';
@@ -42,6 +42,7 @@ export abstract class Shape implements Drawable {
     this.stayInBounds = stayInBounds;
   }
   move():void {
+    this.gravity();
     switch (this.moveType) {
       case MoveType.linear:
         this.stayInBnds();
@@ -68,4 +69,11 @@ export abstract class Shape implements Drawable {
       }
     });
   }
+
+  gravity():void {
+    if(this.hasGravity) {
+      this.speed.y -= this.m * 9.81 / 5000;
+    }
+  }
+
 }

@@ -2,7 +2,10 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './ts/index.ts',
+  entry: {
+    index: './ts/index.ts',
+    gravity: './ts/gravity.ts'
+  },
   module: {
     rules: [
       {
@@ -16,7 +19,7 @@ module.exports = {
     extensions: [ '.tsx', '.ts', '.js' ],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
   },
 };

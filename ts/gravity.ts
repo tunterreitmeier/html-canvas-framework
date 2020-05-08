@@ -8,9 +8,9 @@ let mouseCircle = new Circle({x: 50, y: 50}, 15, 'teal', canvas);
 
 let obstacles:Array<Circle> = [];
 let colors = ['MidnightBlue', 'SteelBlue'];
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < 5; i++) {
   // randomize speed and location of circles
-  let r = 20;
+  let r = 15;
   let dx = (Math.random() - 0.5) * 4;
   let dy = (Math.random() - 0.5) * 4;
   let x = Math.random() * (canvas.canvas.width - 2 * r) + r;
@@ -29,7 +29,7 @@ for(let i = 0; i < 10; i++) {
   }
   obstacles.push(obstacle);
   obstacle.linearMove({x: dx, y: dy}, true)
-  //obstacle.hasGravity = true;
+  obstacle.hasGravity = true;
   canvas.addElement(obstacle);
 }
 
