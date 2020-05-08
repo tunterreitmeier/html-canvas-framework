@@ -10,8 +10,9 @@ export class Circle extends Shape {
   draw():void {
     this.ctx.beginPath();
     this.ctx.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI * 2);
-    this.ctx.fillStyle = this.color || 'black';
-    this.ctx.fill();
+    this.ctx.strokeStyle = this.color || 'black';
+    this.ctx.stroke();
+    //this.ctx.fill();
   }
   getDistance(other: Circle):number {
     return Math.sqrt(
