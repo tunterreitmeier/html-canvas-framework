@@ -12,11 +12,11 @@ let mouseCircle = new Circle({x: 50, y: 50}, 15, 'teal', canvas);
 
 let obstacles:Array<Circle> = [];
 let colors = ['MidnightBlue', 'SteelBlue'];
-for(let i = 0; i < 60; i++) {
+for(let i = 0; i < 200; i++) {
   // randomize speed and location of circles
   let r = 10;
-  let dx = (Math.random() - 0.5) * 8;
-  let dy = (Math.random() - 0.5) * 8;
+  let dx = (Math.random() - 0.5) * 4;
+  let dy = (Math.random() - 0.5) * 4;
   let x = Math.random() * (canvas.canvas.width - 2 * r) + r;
   let y = Math.random() * (canvas.canvas.height - 2 * r) + r;
   let color = colors[Math.floor(Math.random() * colors.length)];
@@ -47,11 +47,17 @@ canvas.animate(() => {
   // this is called on every frame
 
   let touched = false;
+  let collided = [];
   for (let obstacle of obstacles) {
     for (let other of obstacles) {
-        if(other != obstacle && obstacle.getDistance(other) < 0) {
+        if(collided.indexOf(obstacle) != -1)  {
+          continue;
+        }
+        if(other != obstacle && obstacle.getDistance(other) <= 0) {
           //one of the particles touched
-          
+          obstacle.collide(other);
+          obstacles.indexOf(other)
+          collided.push(other);
         }
     }
     if(mouseCircle.getDistance(obstacle) <= 0) {

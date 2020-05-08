@@ -11,12 +11,15 @@ enum MoveType {
 }
 
 export abstract class Shape implements Drawable {
+  
   canvas: Canvas;
   ctx: CanvasRenderingContext2D;
   speed: MovingSpeed;
   moved: Boolean;
   moveType: MoveType;
   stayInBounds: Boolean;
+  m: number;
+
   constructor(public pos: Pos, public color?: string, canvas?: Canvas) {
     this.color = color || 'black';
     if(canvas) {

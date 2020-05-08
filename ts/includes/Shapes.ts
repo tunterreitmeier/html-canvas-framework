@@ -6,6 +6,7 @@ export class Circle extends Shape {
   constructor(pos: Pos, public r: number, color?: string, canvas?: Canvas) {
     super(pos, color, canvas);
     this.r = r;
+    this.m = 2 * Math.PI * r;
   }
   draw():void {
     this.ctx.beginPath();
@@ -30,11 +31,26 @@ export class Circle extends Shape {
       this.speed.y *= -1;
     }
   }
+
+  /*
+   *
+   */
+  collide(other: Circle):void {
+    let temp = {
+      x: this.speed.x,
+      y: this.speed.y
+    }
+    this.speed.x = (this.speed.x * (this.m - other.m) + (2 * other.m * other.speed.x)) / (this.m + other.m);
+    this.speed.y = (this.speed.y * (this.m - other.m) + (2 * other.m * other.speed.y)) / (this.m + other.m);
+    other.speed.x = temp.x;
+    other.speed.y = temp.y
+  }
 }
 
 export class Rectangle extends Shape {
   constructor(public pos: Pos, public width: number, public height: number, public color?: string, canvas?: Canvas) {
     super(pos, color, canvas);
+    this.m = width * height;
   }
   draw():void {
     this.ctx.fillStyle = this.color || 'black';
