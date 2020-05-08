@@ -51,4 +51,18 @@ export abstract class Shape implements Drawable {
     this.move();
     this.draw();
   }
+
+  /*
+   * Binds this element to the cursor
+   */
+  stickToPointer(axis: string = 'both'): void {
+    window.addEventListener('mousemove', (cursor) => {
+      if(axis == 'x' || axis == 'both') {
+        this.pos.x = cursor.clientX;
+      }
+      if(axis == 'y' || axis == 'both'){
+        this.pos.y = cursor.clientY;
+      }
+    });
+  }
 }
