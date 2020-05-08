@@ -1,13 +1,7 @@
+import {Drawable} from './Interfaces';
+
 interface CanvasOptions {
   automaticResize?: Boolean;
-}
-
-export interface Drawable {
-  canvas: Canvas;
-  ctx: CanvasRenderingContext2D;
-  moved: Boolean;
-  draw():void;
-  moveAndDraw():void;
 }
 
 export class Canvas {
@@ -37,7 +31,6 @@ export class Canvas {
         element.draw();
       }
     }
-    this.ctx.stroke();
   }
   addElement(el: Drawable):void {
     this.elements.push(el);
@@ -54,4 +47,5 @@ export class Canvas {
     this.draw();
     window.requestAnimationFrame(() => this.animate(call));
   }
+
 }

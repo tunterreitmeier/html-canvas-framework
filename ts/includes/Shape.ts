@@ -1,5 +1,5 @@
-import {Canvas, Drawable} from './Canvas';
-import {Pos} from './Interfaces';
+import {Canvas} from './Canvas';
+import {Drawable, Pos} from './Interfaces';
 import {MathG} from './MathG';
 
 interface MovingSpeed {
@@ -11,7 +11,7 @@ enum MoveType {
 }
 
 export abstract class Shape implements Drawable {
-  
+
   canvas: Canvas;
   ctx: CanvasRenderingContext2D;
   speed: MovingSpeed;
