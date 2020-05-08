@@ -3,12 +3,17 @@ import {Drawable} from './Interfaces';
 interface CanvasOptions {
   automaticResize?: Boolean;
 }
+export enum AnimationStatus {
+  pause,
+  play
+}
 
 export class Canvas {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   elements: Array<Drawable>;
   automaticResize: Boolean;
+  animStatus: AnimationStatus;
   constructor(selector: string, options?: CanvasOptions) {
     this.canvas = document.querySelector(selector) || new HTMLCanvasElement;
     this.resize();
@@ -41,10 +46,19 @@ export class Canvas {
     let at =  this.elements.indexOf(el);
     if(at >= 0) this.elements.splice(at, 1);
   }
+
+  run():void {
+    this.animStatus = AnimationStatus.play;
+  }
+  stop():void {
+    this.animStatus = AnimationStatus.pause;
+  }
   animate(call?: Function):void {
-    if(call) call();
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.draw();
+    if(this.animStatus == AnimationStatus.play) {
+      if(call) call();
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.draw();
+    }
     window.requestAnimationFrame(() => this.animate(call));
   }
 

@@ -19,6 +19,7 @@ export abstract class Shape implements Drawable {
   stayInBounds: Boolean;
   m: number;
   hasGravity: Boolean;
+  elasticity: number;
 
   constructor(public pos: Pos, public color?: string, canvas?: Canvas) {
     this.color = color || 'black';

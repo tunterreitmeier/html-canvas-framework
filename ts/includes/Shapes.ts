@@ -1,6 +1,6 @@
 import {Shape} from './Shape';
 import {Pos} from './Interfaces';
-import {Canvas} from './Canvas';
+import {Canvas, AnimationStatus} from './Canvas';
 
 export class Circle extends Shape {
   constructor(pos: Pos, public r: number, color?: string, canvas?: Canvas) {
@@ -22,12 +22,19 @@ export class Circle extends Shape {
     ) - (this.r + other.r);
   }
   stayInBnds():void {
-    if(this.pos.x + this.r > this.canvas.canvas.width ||
-      this.pos.x - this.r < 0) {
+    if(this.pos.x + this.r > this.canvas.canvas.width && this.speed.x > 0)  {
       this.speed.x *= -1;
     }
-    if(this.pos.y + this.r > this.canvas.canvas.height ||
-      this.pos.y - this.r < 0) {
+    else if(this.pos.x - this.r < 0 && this.speed.x < 0) {
+      this.speed.x *= -1;
+    }
+    if(this.pos.y + this.r > this.canvas.canvas.height && this.speed.y < 0) {
+      this.speed.y *= -1;
+      if(this.hasGravity) {
+        // reduce elasticity
+        this.speed.y *= this.elasticity;
+      }
+    } else if(this.pos.y - this.r < 0 &&  this.speed.y > 0) {
       this.speed.y *= -1;
     }
   }
@@ -36,6 +43,11 @@ export class Circle extends Shape {
    *
    */
   collide(other: Circle):void {
+
+    // move out of bounds
+    let angle = (other.pos.x - this.pos.x) / (other.pos.y -this.pos.y);
+    console.log(angle);
+    this.canvas.animStatus = AnimationStatus.pause;
     let temp = {
       x: this.speed.x,
       y: this.speed.y
