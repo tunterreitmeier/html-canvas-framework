@@ -7,28 +7,37 @@ let center = {
   x: canvas.canvas.width / 2,
   y: canvas.canvas.height / 2
 }
+
 let mouseCircle = new Circle({x: 50, y: 50}, 50, 'teal', canvas);
-let obstacleCircle = new Circle({x: center.x, y: center.y}, 50);
-obstacleCircle.linearMove({x: 5, y: 2}, true)
+
+let obstacles:Array<Circle> = [];
+for(let i = 0; i < 10; i++) {
+  let dx = (Math.random() - 0.5) * 8;
+  let dy = (Math.random() - 0.5) * 8;
+  let obstacle = new Circle({x: center.x, y: center.y}, 50);
+  obstacles.push(obstacle);
+  obstacle.linearMove({x: dx, y: dy}, true)
+  canvas.addElement(obstacle);
+}
+
+mouseCircle.stickToPointer();
 let test = new Rectangle({x: 200,y: 300}, 50, 300, 'orange');
 
 //canvas.addElement(mouseCircle);
-canvas.addElement(obstacleCircle);
 canvas.addElement(test);
 //canvas.draw();
 
 canvas.animate(() => {
   // this is called on every frame
-  if(mouseCircle.getDistance(obstacleCircle) <= 0) {
-    mouseCircle.color = 'crimson';
-  } else mouseCircle.color = 'teal';
-});
 
-addEventListener('mousemove', (el) => {
-  if(mouseCircle) {
-    mouseCircle.pos.x = el.clientX;
-    mouseCircle.pos.y = el.clientY;
+  let touched = false;
+  for (let obstacle of obstacles) {
+    if(mouseCircle.getDistance(obstacle) <= 0) {
+      touched = true;
+    }
   }
+  mouseCircle.color = (touched) ? 'crimson' : 'teal';
+
 });
 addEventListener('click', () => {
   test.removeFromCanvas(canvas);
