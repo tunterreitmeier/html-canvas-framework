@@ -60,7 +60,7 @@ export class Canvas {
     if(this.animStatus == AnimationStatus.play) {
       if(call) call();
       if(this.clearOpacity) {
-        this.ctx.fillStyle = 'rgba(255, 255, 255, '+this.clearOpacity+')';
+        this.ctx.fillStyle = 'rgba(0, 0, 0, '+this.clearOpacity+')';
       } else {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       }
