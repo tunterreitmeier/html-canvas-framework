@@ -1,5 +1,5 @@
 import {Canvas} from './Canvas';
-import {Drawable, Pos} from './Interfaces';
+import {Drawable, Pos, Style} from './Interfaces';
 
 interface MovingSpeed {
   x: number;
@@ -8,6 +8,7 @@ interface MovingSpeed {
 enum MoveType {
   linear
 }
+
 
 export abstract class Shape implements Drawable {
 
@@ -21,9 +22,11 @@ export abstract class Shape implements Drawable {
   hasGravity: Boolean;
   elasticity: number;
   collidedWith: Array<Drawable>;
+  style: Style;
 
-  constructor(public pos: Pos, public color?: string, canvas?: Canvas) {
-    this.color = color || 'black';
+  constructor(public pos: Pos, style?: Style, canvas?: Canvas) {
+    if(!style) this.style = {stroke: 'black'};
+    //this.color = color || 'black';
     this.collidedWith = [];
     if(canvas) {
       canvas.addElement(this);
@@ -38,6 +41,16 @@ export abstract class Shape implements Drawable {
   removeFromCanvas(canvas: Canvas): void {
     canvas.removeElement(this);
   }
+
+  drawStyles(): void {
+    if(this.style.stroke) {
+        this.ctx.strokeStyle = this.style.stroke;
+    }
+    if(this.style.fill) {
+        this.ctx.fillStyle = this.style.fill;
+    }
+  }
+
   linearMove(speed: MovingSpeed, stayInBounds: Boolean = false) {
     this.speed = speed;
     this.moved = true;

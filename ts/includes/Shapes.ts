@@ -1,18 +1,18 @@
 import {Shape} from './Shape';
-import {Pos} from './Interfaces';
-import {Canvas, AnimationStatus} from './Canvas';
+import {Pos, Style} from './Interfaces';
+import {Canvas} from './Canvas';
 
 export class Circle extends Shape {
-  constructor(pos: Pos, public r: number, color?: string, canvas?: Canvas) {
-    super(pos, color, canvas);
+  constructor(pos: Pos, public r: number, style?: Style, canvas?: Canvas) {
+    super(pos, style, canvas);
     this.r = r;
     this.m = 2 * Math.PI * r;
   }
   draw():void {
     this.ctx.beginPath();
     this.ctx.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI * 2);
-    this.ctx.strokeStyle = this.color || 'black';
-    this.ctx.stroke();
+    this.drawStyles();
+    //this.ctx.stroke();
     //this.ctx.fill();
   }
   getDistance(other: Circle):number {
@@ -61,12 +61,12 @@ export class Circle extends Shape {
 }
 
 export class Rectangle extends Shape {
-  constructor(public pos: Pos, public width: number, public height: number, public color?: string, canvas?: Canvas) {
-    super(pos, color, canvas);
+  constructor(public pos: Pos, public width: number, public height: number, style?: Style, canvas?: Canvas) {
+    super(pos, style, canvas);
     this.m = width * height;
   }
   draw():void {
-    this.ctx.fillStyle = this.color || 'black';
+    this.drawStyles();
     this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
   }
   stayInBnds():void {

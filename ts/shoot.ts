@@ -6,7 +6,7 @@ import {MathG} from './includes/MathG';
 let canvas = new Canvas('canvas');
 let x = canvas.canvas.width / 2;
 let y = canvas.canvas.height;
-let cannon = new Rectangle({x: x, y: y}, 10, 10, 'black', canvas);
+let cannon = new Rectangle({x: x, y: y}, 10, 10, {fill: 'black'}, canvas);
 canvas.addElement(cannon);
 
 canvas.animate(() => {
@@ -20,7 +20,7 @@ addEventListener('click', (e) => {
   //console.log(e);
 
 
-  let bullet = new Circle({x: x, y: y}, 3, '#333', canvas);
+  let bullet = new Circle({x: x, y: y}, 3, {fill: '#333'}, canvas);
 
   // tan(a) = b / a
   let b  = y - e.clientY;

@@ -4,7 +4,7 @@ import {Circle,Rectangle} from './includes/Shapes';
 
 let canvas = new Canvas('canvas');
 
-let mouseCircle = new Circle({x: 50, y: 50}, 15, 'teal', canvas);
+let mouseCircle = new Circle({x: 50, y: 50}, 15, {fill: 'teal'}, canvas);
 
 let obstacles:Array<Circle> = [];
 let colors = ['MidnightBlue', 'SteelBlue'];
@@ -17,7 +17,7 @@ for(let i = 0; i < 50; i++) {
   let x = Math.random() * (canvas.canvas.width - 2 * r) + r;
   let y = Math.random() * (canvas.canvas.height - 2 * r) + r;
   let color = colors[Math.floor(Math.random() * colors.length)];
-  let obstacle = new Circle({x: x, y: y}, r, color);
+  let obstacle = new Circle({x: x, y: y}, r, {stroke: color});
   let goodSpot = true;
   for (let other of obstacles) {
     if(obstacle.getDistance(other) < 0 && obstacle != other) {
@@ -55,7 +55,7 @@ canvas.animate(() => {
       touched = true;
     }
   }
-  mouseCircle.color = (touched) ? 'crimson' : 'teal';
+  mouseCircle.style.fill = (touched) ? 'crimson' : 'teal';
 
 });
 canvas.run();

@@ -36,6 +36,8 @@ export class Canvas {
         element.draw();
       }
     }
+    this.ctx.fill();
+    this.ctx.stroke();
   }
   addElement(el: Drawable):void {
     this.elements.push(el);

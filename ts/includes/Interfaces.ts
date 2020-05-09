@@ -12,3 +12,8 @@ export interface Pos {
   x: number,
   y: number,
 }
+
+export interface Style {
+  stroke?: string;
+  fill?: string;
+}
