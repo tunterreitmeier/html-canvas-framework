@@ -7,7 +7,8 @@ module.exports = {
     gravity: './ts/gravity.ts',
     shoot: './ts/shoot.ts',
     bounce: './ts/bounce.ts',
-    sinwave: './ts/sinwave.ts'
+    sinwave: './ts/sinwave.ts',
+    circularmotion: './ts/circularmotion.ts'
   },
   module: {
     rules: [

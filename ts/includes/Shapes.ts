@@ -90,8 +90,21 @@ export class Rectangle extends Shape {
 
 export class SinWave extends Shape {
 
+  offset: number;
+  frequency: number;
+
   constructor(public amp: number, public length: number, pos: Pos, style?: Style) {
     super(pos, style);
+    this.offset = 0;
+    this.frequency = 0;
+  }
+
+  move(): void {
+    this.offset += this.frequency;
+  }
+  animate(frequency: number) {
+    this.frequency = frequency;
+    this.moved = true;
   }
 
   draw():void {
@@ -99,8 +112,8 @@ export class SinWave extends Shape {
     if(this.style.stroke) {
       this.ctx.strokeStyle = this.style.stroke;
     }
-    for(let i = 0; i < this.canvas.canvas.width; i++) {
-      let point = (this.canvas.canvas.height / 2) + Math.sin(i / this.length) * this.amp;
+    for(let i = this.pos.x; i < this.canvas.canvas.width; i++) {
+      let point = (this.pos.y) + Math.sin((i * this.length) + this.offset) * this.amp;
       this.ctx.lineTo(i, point);
     }
     this.ctx.stroke();
