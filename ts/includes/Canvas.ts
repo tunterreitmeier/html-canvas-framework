@@ -9,11 +9,14 @@ export enum AnimationStatus {
 }
 
 export class Canvas {
+
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   elements: Array<Drawable>;
   automaticResize: Boolean;
   animStatus: AnimationStatus;
+  clearOpacity: number;
+
   constructor(selector: string, options?: CanvasOptions) {
     this.canvas = document.querySelector(selector) || new HTMLCanvasElement;
     this.resize();
@@ -56,7 +59,12 @@ export class Canvas {
   animate(call?: Function):void {
     if(this.animStatus == AnimationStatus.play) {
       if(call) call();
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      if(this.clearOpacity) {
+        this.ctx.fillStyle = 'rgba(255, 255, 255, '+this.clearOpacity+')';
+      } else {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       this.draw();
     }
     window.requestAnimationFrame(() => this.animate(call));

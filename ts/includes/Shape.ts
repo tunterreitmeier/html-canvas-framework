@@ -6,7 +6,7 @@ interface MovingSpeed {
   y: number;
 }
 enum MoveType {
-  linear
+  linear, circular
 }
 
 
@@ -15,6 +15,7 @@ export abstract class Shape implements Drawable {
   canvas: Canvas;
   ctx: CanvasRenderingContext2D;
   speed: MovingSpeed;
+  circularSpeed: number;
   moved: Boolean;
   moveType: MoveType;
   stayInBounds: Boolean;
@@ -23,9 +24,12 @@ export abstract class Shape implements Drawable {
   elasticity: number;
   collidedWith: Array<Drawable>;
   style: Style;
+  radians: number;
+  movingRadius: number;
+  startingPos: Pos;
 
-  readonly physG = 9.81;
-  readonly physGF = 2000;
+  readonly physG:number = 9.81;
+  readonly physGF:number = 2000;
 
   constructor(public pos: Pos, style?: Style, canvas?: Canvas) {
     if(!style) {
@@ -40,6 +44,7 @@ export abstract class Shape implements Drawable {
         this.style = {fill: style.fill, stroke: style.stroke};
       }
     }
+    this.startingPos = JSON.parse(JSON.stringify(pos));;
     this.speed = {x: 0, y: 0};
     this.collidedWith = [];
     if(canvas) {
@@ -62,6 +67,13 @@ export abstract class Shape implements Drawable {
     this.moveType = MoveType.linear;
     this.stayInBounds = stayInBounds;
   }
+  circularMove(speed: number, movingRadius: number, startingRadians: number) {
+    this.radians = startingRadians;
+    this.circularSpeed = speed;
+    this.moved = true;
+    this.moveType = MoveType.circular;
+    this.movingRadius = movingRadius;
+  }
   move():void {
     this.gravity();
     switch (this.moveType) {
@@ -70,6 +82,12 @@ export abstract class Shape implements Drawable {
         this.pos.x += this.speed.x;
         this.pos.y -= this.speed.y;
         break;
+      case MoveType.circular:
+        this.radians += this.circularSpeed;
+        this.pos.x = this.startingPos.x + Math.cos(this.radians) * this.movingRadius;
+        this.pos.y = this.startingPos.y + Math.sin(this.radians) * this.movingRadius;
+        break;
+
     }
     this.collidedWith = [];
   }
