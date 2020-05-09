@@ -4,7 +4,9 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './ts/index.ts',
-    gravity: './ts/gravity.ts'
+    gravity: './ts/gravity.ts',
+    shoot: './ts/shoot.ts',
+    bounce: './ts/bounce.ts'
   },
   module: {
     rules: [
