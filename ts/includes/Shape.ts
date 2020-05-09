@@ -25,8 +25,18 @@ export abstract class Shape implements Drawable {
   style: Style;
 
   constructor(public pos: Pos, style?: Style, canvas?: Canvas) {
-    if(!style) this.style = {stroke: 'black'};
-    //this.color = color || 'black';
+    if(!style) {
+      this.style = {stroke: 'black', fill: undefined};
+    } else {
+      if (!style.hasOwnProperty('fill')) {
+        this.style = {fill: undefined, stroke: style.stroke};
+      }
+      else if (!style.hasOwnProperty('stroke')) {
+        this.style = {fill: style.fill, stroke: undefined};
+      } else {
+        this.style = {fill: style.fill, stroke: style.stroke};
+      }
+    }
     this.collidedWith = [];
     if(canvas) {
       canvas.addElement(this);
@@ -40,15 +50,6 @@ export abstract class Shape implements Drawable {
   }
   removeFromCanvas(canvas: Canvas): void {
     canvas.removeElement(this);
-  }
-
-  drawStyles(): void {
-    if(this.style.stroke) {
-        this.ctx.strokeStyle = this.style.stroke;
-    }
-    if(this.style.fill) {
-        this.ctx.fillStyle = this.style.fill;
-    }
   }
 
   linearMove(speed: MovingSpeed, stayInBounds: Boolean = false) {

@@ -11,9 +11,15 @@ export class Circle extends Shape {
   draw():void {
     this.ctx.beginPath();
     this.ctx.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI * 2);
-    this.drawStyles();
-    //this.ctx.stroke();
-    //this.ctx.fill();
+    if(this.style.stroke) {
+        this.ctx.strokeStyle = this.style.stroke;
+        this.ctx.stroke();
+    }
+    if(this.style.fill) {
+        this.ctx.fillStyle = this.style.fill;
+        this.ctx.fill();
+    }
+    //this.drawStyles();
   }
   getDistance(other: Circle):number {
     return Math.sqrt(
@@ -66,8 +72,15 @@ export class Rectangle extends Shape {
     this.m = width * height;
   }
   draw():void {
-    this.drawStyles();
-    this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+    if(this.style.stroke) {
+      this.ctx.strokeStyle = this.style.stroke;
+      this.ctx.strokeRect(this.pos.x, this.pos.y, this.width, this.height);
+    }
+    if(this.style.fill) {
+      this.ctx.fillStyle = this.style.fill;
+      this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+    }
+
   }
   stayInBnds():void {
     // todo
