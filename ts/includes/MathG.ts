@@ -9,4 +9,7 @@ export class MathG {
   static cosD(degree: number):number {
     return Math.cos(this.radians(degree));
   }
+  static atanD(degree: number):number {
+    return Math.atan(degree) * (180 / Math.PI);
+  }
 }
