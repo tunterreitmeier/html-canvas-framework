@@ -45,7 +45,7 @@ canvas.animate(() => {
   // this is called on every frame
 
   let touched = false;
-  let collided = [];
+  let collided: Array<Circle> = [];
   for (let obstacle of obstacles) {
     for (let other of obstacles) {
         if(collided.indexOf(obstacle) != -1)  {
@@ -53,9 +53,8 @@ canvas.animate(() => {
         }
         if(other != obstacle && obstacle.getDistance(other) <= 0) {
           //one of the particles touched
-          obstacle.collide(other);
-          obstacles.indexOf(other)
-          collided.push(other);
+          //obstacle.collide(other);
+          //collided.push(other);
         }
     }
     if(mouseCircle.getDistance(obstacle) <= 0) {
@@ -65,6 +64,7 @@ canvas.animate(() => {
   mouseCircle.color = (touched) ? 'crimson' : 'teal';
 
 });
+canvas.run();
 addEventListener('click', () => {
   test.removeFromCanvas(canvas);
   //canvas.removeElement(test);

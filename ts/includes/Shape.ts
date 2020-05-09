@@ -20,9 +20,11 @@ export abstract class Shape implements Drawable {
   m: number;
   hasGravity: Boolean;
   elasticity: number;
+  collidedWith: Array<Drawable>;
 
   constructor(public pos: Pos, public color?: string, canvas?: Canvas) {
     this.color = color || 'black';
+    this.collidedWith = [];
     if(canvas) {
       canvas.addElement(this);
     }
@@ -51,14 +53,16 @@ export abstract class Shape implements Drawable {
         this.pos.y -= this.speed.y;
         break;
     }
+    this.collidedWith = [];
   }
   moveAndDraw():void {
     this.move();
     this.draw();
   }
 
-  /*
+  /**
    * Binds this element to the cursor
+   * @param axis can be either x, y, or both
    */
   stickToPointer(axis: string = 'both'): void {
     window.addEventListener('mousemove', (cursor) => {

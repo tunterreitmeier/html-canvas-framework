@@ -8,9 +8,10 @@ let mouseCircle = new Circle({x: 50, y: 50}, 15, 'teal', canvas);
 
 let obstacles:Array<Circle> = [];
 let colors = ['MidnightBlue', 'SteelBlue'];
-for(let i = 0; i < 4; i++) {
+for(let i = 0; i < 50; i++) {
   // randomize speed and location of circles
-  let r = 50;
+  //let r = Math.random() * 20 + 5;
+  let r = 15;
   let dx = (Math.random() - 0.5) * 4;
   let dy = (Math.random() - 0.5) * 4;
   let x = Math.random() * (canvas.canvas.width - 2 * r) + r;
@@ -34,27 +35,20 @@ for(let i = 0; i < 4; i++) {
 }
 
 mouseCircle.stickToPointer();
-let test = new Rectangle({x: 200,y: 300}, 50, 300, 'orange');
+//let test = new Rectangle({x: 200,y: 300}, 50, 300, 'orange');
 
 //canvas.addElement(mouseCircle);
-canvas.addElement(test);
+//canvas.addElement(test);
 canvas.draw();
 
 canvas.animate(() => {
   // this is called on every frame
 
   let touched = false;
-  let collided = [];
   for (let obstacle of obstacles) {
     for (let other of obstacles) {
-        if(collided.indexOf(obstacle) != -1)  {
-          continue;
-        }
         if(other != obstacle && obstacle.getDistance(other) <= 0) {
-          //one of the particles touched
           obstacle.collide(other);
-          obstacles.indexOf(other)
-          collided.push(other);
         }
     }
     if(mouseCircle.getDistance(obstacle) <= 0) {
@@ -64,8 +58,7 @@ canvas.animate(() => {
   mouseCircle.color = (touched) ? 'crimson' : 'teal';
 
 });
+canvas.run();
 addEventListener('click', () => {
-  test.removeFromCanvas(canvas);
   canvas.run();
-  //canvas.removeElement(test);
 });

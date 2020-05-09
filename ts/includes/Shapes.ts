@@ -21,6 +21,9 @@ export class Circle extends Shape {
       Math.pow(this.pos.y - other.pos.y, 2)
     ) - (this.r + other.r);
   }
+  getDistanceRectangle(other: Rectangle):number {
+    return 0;
+  }
   stayInBnds():void {
     if(this.pos.x + this.r > this.canvas.canvas.width && this.speed.x > 0)  {
       this.speed.x *= -1;
@@ -31,7 +34,6 @@ export class Circle extends Shape {
     if(this.pos.y + this.r > this.canvas.canvas.height && this.speed.y < 0) {
       this.speed.y *= -1;
       if(this.hasGravity) {
-        // reduce elasticity
         this.speed.y *= this.elasticity;
       }
     } else if(this.pos.y - this.r < 0 &&  this.speed.y > 0) {
@@ -39,15 +41,13 @@ export class Circle extends Shape {
     }
   }
 
-  /*
+  /**
    *
    */
   collide(other: Circle):void {
-
-    // move out of bounds
-    let angle = (other.pos.x - this.pos.x) / (other.pos.y -this.pos.y);
-    console.log(angle);
-    this.canvas.animStatus = AnimationStatus.pause;
+    if(other.collidedWith.indexOf(this) != -1 || other == this) {
+      return;
+    }
     let temp = {
       x: this.speed.x,
       y: this.speed.y
@@ -56,6 +56,7 @@ export class Circle extends Shape {
     this.speed.y = (this.speed.y * (this.m - other.m) + (2 * other.m * other.speed.y)) / (this.m + other.m);
     other.speed.x = temp.x;
     other.speed.y = temp.y
+    this.collidedWith.push(other);
   }
 }
 
