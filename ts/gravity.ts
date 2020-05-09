@@ -28,9 +28,8 @@ for(let i = 0; i < 50; i++) {
     continue;
   }
   obstacles.push(obstacle);
-  obstacle.linearMove({x: dx, y: dy}, true)
-  obstacle.hasGravity = true;
-  obstacle.elasticity = 0.7;
+  obstacle.linearMove({x: dx, y: dy}, true);
+  obstacle.addGravity(0.7);
   canvas.addElement(obstacle);
 }
 

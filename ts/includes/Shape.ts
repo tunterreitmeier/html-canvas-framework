@@ -24,6 +24,9 @@ export abstract class Shape implements Drawable {
   collidedWith: Array<Drawable>;
   style: Style;
 
+  readonly physG = 9.81;
+  readonly physGF = 2000;
+
   constructor(public pos: Pos, style?: Style, canvas?: Canvas) {
     if(!style) {
       this.style = {stroke: 'black', fill: undefined};
@@ -89,9 +92,14 @@ export abstract class Shape implements Drawable {
     });
   }
 
+  addGravity(elasticity?: number):void {
+    this.hasGravity = true;
+    this.elasticity = elasticity || 1;
+  }
+
   gravity():void {
     if(this.hasGravity) {
-      this.speed.y -= this.m * 9.81 / 5000;
+      this.speed.y -= this.m * this.physG / this.physGF;
     }
   }
 
