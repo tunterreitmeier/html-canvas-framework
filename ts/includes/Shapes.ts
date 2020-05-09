@@ -25,24 +25,25 @@ export class Circle extends Shape {
     return Math.sqrt(
       Math.pow(this.pos.x - other.pos.x, 2) +
       Math.pow(this.pos.y - other.pos.y, 2)
-    ) - (this.r + other.r);
+    ) - (this.r + other.r );
+    //- this.speed.x / other.speed.x - this.speed.y / other.speed.y;
   }
   getDistanceRectangle(other: Rectangle):number {
     return 0;
   }
   stayInBnds():void {
-    if(this.pos.x + this.r > this.canvas.canvas.width && this.speed.x > 0)  {
+    if(this.pos.x + this.r + this.speed.x > this.canvas.canvas.width && this.speed.x > 0)  {
       this.speed.x *= -1;
     }
     else if(this.pos.x - this.r < 0 && this.speed.x < 0) {
       this.speed.x *= -1;
     }
-    if(this.pos.y + this.r > this.canvas.canvas.height && this.speed.y < 0) {
+    if(this.pos.y + this.r + this.speed.y > this.canvas.canvas.height && this.speed.y < 0) {
       this.speed.y *= -1;
       if(this.hasGravity) {
         this.speed.y *= this.elasticity;
       }
-    } else if(this.pos.y - this.r < 0 &&  this.speed.y > 0) {
+    } else if(this.pos.y - this.r - this.speed.y < 0 &&  this.speed.y > 0) {
       this.speed.y *= -1;
     }
   }
@@ -85,4 +86,25 @@ export class Rectangle extends Shape {
   stayInBnds():void {
     // todo
   }
+}
+
+export class SinWave extends Shape {
+
+  constructor(public amp: number, public length: number, pos: Pos, style?: Style) {
+    super(pos, style);
+  }
+
+  draw():void {
+    this.ctx.beginPath();
+    if(this.style.stroke) {
+      this.ctx.strokeStyle = this.style.stroke;
+    }
+    for(let i = 0; i < this.canvas.canvas.width; i++) {
+      let point = (this.canvas.canvas.height / 2) + Math.sin(i / this.length) * this.amp;
+      this.ctx.lineTo(i, point);
+    }
+    this.ctx.stroke();
+  }
+
+  stayInBnds():void {}
 }

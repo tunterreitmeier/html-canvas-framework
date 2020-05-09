@@ -40,6 +40,7 @@ export abstract class Shape implements Drawable {
         this.style = {fill: style.fill, stroke: style.stroke};
       }
     }
+    this.speed = {x: 0, y: 0};
     this.collidedWith = [];
     if(canvas) {
       canvas.addElement(this);

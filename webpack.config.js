@@ -6,7 +6,8 @@ module.exports = {
     index: './ts/index.ts',
     gravity: './ts/gravity.ts',
     shoot: './ts/shoot.ts',
-    bounce: './ts/bounce.ts'
+    bounce: './ts/bounce.ts',
+    sinwave: './ts/sinwave.ts'
   },
   module: {
     rules: [

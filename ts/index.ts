@@ -8,12 +8,12 @@ let mouseCircle = new Circle({x: 50, y: 50}, 15, {fill: 'teal'}, canvas);
 
 let obstacles:Array<Circle> = [];
 let colors = ['MidnightBlue', 'SteelBlue'];
-for(let i = 0; i < 50; i++) {
+for(let i = 0; i < 100; i++) {
   // randomize speed and location of circles
   //let r = Math.random() * 20 + 5;
   let r = 15;
-  let dx = (Math.random() - 0.5) * 4;
-  let dy = (Math.random() - 0.5) * 4;
+  let dx = (Math.random() - 0.5) * 8;
+  let dy = (Math.random() - 0.5) * 8;
   let x = Math.random() * (canvas.canvas.width - 2 * r) + r;
   let y = Math.random() * (canvas.canvas.height - 2 * r) + r;
   let color = colors[Math.floor(Math.random() * colors.length)];
