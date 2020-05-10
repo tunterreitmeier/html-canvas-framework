@@ -19,11 +19,11 @@ export class Canvas {
 
   constructor(selector: string, options?: CanvasOptions) {
     this.canvas = document.querySelector(selector) || new HTMLCanvasElement;
-    this.resize();
     this.ctx = this.canvas.getContext('2d') || new CanvasRenderingContext2D;
     this.elements = [];
     this.automaticResize = options?.automaticResize || false;
     if(this.automaticResize) {
+      this.resize();
       window.addEventListener('resize', () => this.resize());
     }
   }
