@@ -59,12 +59,13 @@ export class Canvas {
   animate(call?: Function):void {
     if(this.animStatus == AnimationStatus.play) {
       if(call) call();
-      if(this.clearOpacity) {
+      if(this.clearOpacity > 0) {
+        console.log(this.clearOpacity);
         this.ctx.fillStyle = 'rgba(0, 0, 0, '+this.clearOpacity+')';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       } else {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       }
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       this.draw();
     }
     window.requestAnimationFrame(() => this.animate(call));

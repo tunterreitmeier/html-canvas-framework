@@ -74,6 +74,27 @@ export abstract class Shape implements Drawable {
     this.moveType = MoveType.circular;
     this.movingRadius = movingRadius;
   }
+  keyboardMove(speed: MovingSpeed) {
+    this.speed = speed;
+    window.addEventListener('keydown', (ev) => {
+      switch (ev.which) {
+        case 87: // w
+          this.pos.y -= this.speed.y;
+          break;
+        case 83: // s
+          this.pos.y += this.speed.y;
+          break;
+        case 65: // a
+          this.pos.x -= this.speed.x;
+          break;
+        case 68: // d
+          this.pos.x += this.speed.x;
+          break;
+        default:
+          break;
+      }
+    });
+  }
   move():void {
     this.gravity();
     switch (this.moveType) {
@@ -110,6 +131,8 @@ export abstract class Shape implements Drawable {
       }
     });
   }
+
+
 
   addGravity(elasticity?: number):void {
     this.hasGravity = true;

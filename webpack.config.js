@@ -8,7 +8,8 @@ module.exports = {
     shoot: './ts/shoot.ts',
     bounce: './ts/bounce.ts',
     sinwave: './ts/sinwave.ts',
-    circularmotion: './ts/circularmotion.ts'
+    circularmotion: './ts/circularmotion.ts',
+    keyboard: './ts/keyboard.ts'
   },
   module: {
     rules: [
