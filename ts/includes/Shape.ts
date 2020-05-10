@@ -74,24 +74,30 @@ export abstract class Shape implements Drawable {
     this.moveType = MoveType.circular;
     this.movingRadius = movingRadius;
   }
-  keyboardMove(speed: MovingSpeed) {
+  keyboardMove(speed: MovingSpeed, callback?: Function) {
     this.speed = speed;
     window.addEventListener('keydown', (ev) => {
+      let cb:Boolean = false;
       switch (ev.which) {
         case 87: // w
           this.pos.y -= this.speed.y;
+          cb = true;
           break;
         case 83: // s
           this.pos.y += this.speed.y;
+          cb = true;
           break;
         case 65: // a
           this.pos.x -= this.speed.x;
+          cb = true;
           break;
         case 68: // d
           this.pos.x += this.speed.x;
+          cb = true;
           break;
-        default:
-          break;
+      }
+      if(cb && callback) {
+        callback();
       }
     });
   }
