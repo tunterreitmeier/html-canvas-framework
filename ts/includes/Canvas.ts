@@ -15,12 +15,13 @@ export class Canvas {
   elements: Array<Drawable>;
   automaticResize: Boolean;
   animStatus: AnimationStatus;
-  clearOpacity: number;
+  clearOpacity: number | undefined;
 
   constructor(selector: string, options?: CanvasOptions) {
     this.canvas = document.querySelector(selector) || new HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d') || new CanvasRenderingContext2D;
     this.elements = [];
+    this.animStatus = AnimationStatus.pause;
     this.automaticResize = options?.automaticResize || false;
     if(this.automaticResize) {
       this.resize();
@@ -59,8 +60,7 @@ export class Canvas {
   animate(call?: Function):void {
     if(this.animStatus == AnimationStatus.play) {
       if(call) call();
-      if(this.clearOpacity > 0) {
-        console.log(this.clearOpacity);
+      if(this.clearOpacity) {
         this.ctx.fillStyle = 'rgba(0, 0, 0, '+this.clearOpacity+')';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       } else {

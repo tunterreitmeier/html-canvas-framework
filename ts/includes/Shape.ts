@@ -12,20 +12,20 @@ enum MoveType {
 
 export abstract class Shape implements Drawable {
 
-  canvas: Canvas;
-  ctx: CanvasRenderingContext2D;
+  canvas!: Canvas;
+  ctx!: CanvasRenderingContext2D;
   speed: MovingSpeed;
-  circularSpeed: number;
-  moved: Boolean;
-  moveType: MoveType;
-  stayInBounds: Boolean;
-  m: number;
-  hasGravity: Boolean;
-  elasticity: number;
+  circularSpeed: number = 0;
+  moved: Boolean = false;
+  moveType: MoveType | undefined;
+  stayInBounds: Boolean = false;
+  m!: number;
+  hasGravity: Boolean = false;
+  elasticity: number = 1;
   collidedWith: Array<Drawable>;
   style: Style;
-  radians: number;
-  movingRadius: number;
+  radians: number = 0;
+  movingRadius: number = 0;
   startingPos: Pos;
 
   readonly physG:number = 9.81;
@@ -44,6 +44,7 @@ export abstract class Shape implements Drawable {
         this.style = {fill: style.fill, stroke: style.stroke};
       }
     }
+    // get value and not reference 
     this.startingPos = JSON.parse(JSON.stringify(pos));;
     this.speed = {x: 0, y: 0};
     this.collidedWith = [];
