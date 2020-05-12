@@ -3,7 +3,11 @@
   "version": "0.0.7",
   "description": "",
   "main": "build/src/index.js",
+<<<<<<< HEAD
   "types": "build/src/index.d.ts",
+=======
+  "types": "build/src/index.ts",
+>>>>>>> aa93a6fc5fc0026fa2036793bb30580205f2c421
   "scripts": {
     "prepublish": "tsc",
     "build": "webpack",
