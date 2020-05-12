@@ -1,5 +1,5 @@
 import {Canvas} from '../src/Canvas';
-import {Circle,Rectangle} from '../src/Shapes';
+import {Circle} from '../src/Shapes';
 
 let canvas = new Canvas('canvas');
 
