@@ -1,16 +1,20 @@
 {
   "name": "html-canvas-fw",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "",
-  "main": "index.js",
+  "main": "src",
+  "types": "build",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch"
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tunterreitmeier/html-canvas-framework.git"
+  },
   "author": "Thomas Unterreitmeier",
-  "license": "UNLICENSED",
+  "license": "ISC",
   "devDependencies": {
     "ts-loader": "^7.0.3",
     "typescript": "^3.8.3",

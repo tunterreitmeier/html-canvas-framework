@@ -1,6 +1,6 @@
-import {Canvas} from './includes/Canvas';
-import {Circle,Rectangle} from './includes/Shapes';
-import {MathG} from './includes/MathG';
+import {Canvas} from '../src/Canvas';
+import {Circle,Rectangle} from '../src/Shapes';
+import {MathG} from '../src/includes/MathG';
 
 
 let canvas = new Canvas('canvas');

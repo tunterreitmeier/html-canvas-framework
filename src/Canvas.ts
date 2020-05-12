@@ -1,4 +1,4 @@
-import {Drawable} from './Interfaces';
+import {Drawable} from './includes/Interfaces';
 
 interface CanvasOptions {
   automaticResize?: Boolean;

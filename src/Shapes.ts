@@ -1,5 +1,5 @@
-import {Shape} from './Shape';
-import {Pos, Style} from './Interfaces';
+import {Shape} from './includes/Shape';
+import {Pos, Style} from './includes/Interfaces';
 import {Canvas} from './Canvas';
 
 export class Circle extends Shape {

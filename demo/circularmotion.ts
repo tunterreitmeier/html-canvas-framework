@@ -1,5 +1,5 @@
-import {Canvas} from './includes/Canvas';
-import {Circle} from './includes/Shapes';
+import {Canvas} from '../src/Canvas';
+import {Circle} from '../src/Shapes';
 
 const canvas = new Canvas('canvas');
 canvas.clearOpacity = 0.02;

@@ -7,8 +7,12 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "./build",
-    "typeRoots": ["./node_modules/@types"]
+    "outDir": "./build/",
+    "typeRoots": [
+      "./build/src",
+      "./node_modules/@types"
+    ],
+    "declaration": true
   },
   "exclude": [
     "node_modules"

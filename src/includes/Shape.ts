@@ -1,4 +1,4 @@
-import {Canvas} from './Canvas';
+import {Canvas} from '../Canvas';
 import {Drawable, Pos, Style} from './Interfaces';
 
 interface MovingSpeed {
@@ -44,7 +44,7 @@ export abstract class Shape implements Drawable {
         this.style = {fill: style.fill, stroke: style.stroke};
       }
     }
-    // get value and not reference 
+    // get value and not reference
     this.startingPos = JSON.parse(JSON.stringify(pos));;
     this.speed = {x: 0, y: 0};
     this.collidedWith = [];

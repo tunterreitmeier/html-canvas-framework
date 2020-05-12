@@ -3,13 +3,13 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './ts/index.ts',
-    gravity: './ts/gravity.ts',
-    shoot: './ts/shoot.ts',
-    bounce: './ts/bounce.ts',
-    sinwave: './ts/sinwave.ts',
-    circularmotion: './ts/circularmotion.ts',
-    keyboard: './ts/keyboard.ts'
+    index: './demo/index.ts',
+    gravity: './demo/gravity.ts',
+    shoot: './demo/shoot.ts',
+    bounce: './demo/bounce.ts',
+    //sinwave: './demo/sinwave.ts',
+    circularmotion: './demo/circularmotion.ts',
+    keyboard: './demo/keyboard.ts'
   },
   module: {
     rules: [
@@ -25,6 +25,6 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'demo', 'build'),
   },
 };
