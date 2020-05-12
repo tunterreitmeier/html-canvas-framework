@@ -9,12 +9,12 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "./build/",
     "typeRoots": [
-      "./build/src",
       "./node_modules/@types"
     ],
     "declaration": true
   },
   "exclude": [
+    "build",
     "node_modules"
   ]
 }
